@@ -16,8 +16,9 @@ class App extends Component {
     this.state = {
       playing: false,
       problems: this.createTimesTable(),
-      current: {},
-      input: ''
+      current: { problem: null, answer: null },
+      input: '',
+      response: "Hit 'enter' to check answer"
     }
 
   }
@@ -35,14 +36,28 @@ class App extends Component {
   }
 
   getProblem = () => {
-    let n = Math.floor(Math.random() * Math.floor(this.state.problems.length()));
+    let n = Math.floor(Math.random() * Math.floor(this.state.problems.length))
     return this.state.problems[n]
   }
 
   play = () => {
+    let current = this.getProblem()
     this.setState({
-      playing: true
+      playing: true,
+      current: current
     })
+  }
+
+  checkAnswer = str => {
+    this.setState({ input: str })
+    console.log(str)
+    console.log(this.state.current)
+    if (parseInt(str) === this.state.current.answer) {
+
+      this.setState({
+        response: "You got it"
+      })
+    }
   }
 
 
@@ -52,9 +67,9 @@ class App extends Component {
       <div className="app">
         <Header></Header>
         <Description></Description>
-        {this.state.playing ? <Card></Card> : <PlayButton play={this.play()}></PlayButton>}
-        {this.state.playing ? <Input></Input> : null}
-        {this.state.playing ? <Response></Response> : null}
+        {this.state.playing ? <Card problem={this.state.current}></Card> : <PlayButton play={this.play}></PlayButton>}
+        {this.state.playing ? <Input check={this.checkAnswer}></Input> : null}
+        {this.state.playing ? <Response text={this.state.response}></Response> : null}
         <Footer></Footer>
       </div>
     )

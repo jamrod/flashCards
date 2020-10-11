@@ -2,10 +2,10 @@ import React from 'react'
 
 import '../App.css'
 
-function Response() {
+function Response(props) {
     return (
         <div className="flex-container-row">
-            <span id="response"></span>
+            <span id="response">{props.text}</span>
         </div>
     )
 }
