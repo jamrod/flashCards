@@ -11,9 +11,8 @@ class Input extends Component {
     }
 
     componentDidUpdate = newProps => {
-        if (this.props.show) {
-            this.input.focus()
-        }
+        this.input.focus()
+
     }
 
     getInput = str => {
@@ -22,18 +21,26 @@ class Input extends Component {
         })
     }
 
+    clear = () => {
+        document.querySelector('#input').value = ''
+        this.setState({ input: '' })
+    }
+
     render() {
         return (
-            <div className="flex-container-row">
+            <div className="centered">
                 <input
                     ref={(input) => { this.input = input }}
                     type="text"
-                    placeholder="Type your answer here"
+                    id="input"
                     onChange={e => {
                         this.getInput(e.target.value);
                     }}
                     onKeyDown={e => {
-                        if (e.key === 'Enter') { this.props.check(this.state.input) }
+                        if (e.key === 'Enter') {
+                            this.props.check(this.state.input)
+                            this.clear()
+                        }
                     }}
                 ></input>
             </div>

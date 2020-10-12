@@ -17,7 +17,6 @@ class App extends Component {
       playing: false,
       problems: this.createTimesTable(),
       current: { problem: null, answer: null },
-      input: '',
       response: "Hit 'enter' to check answer"
     }
 
@@ -53,23 +52,40 @@ class App extends Component {
     console.log(str)
     console.log(this.state.current)
     if (parseInt(str) === this.state.current.answer) {
-
       this.setState({
         response: "You got it"
       })
+    } else {
+      this.setState({
+        response: `Sorry, the correct answer is ${this.state.current.answer}`
+      })
     }
+    setTimeout(this.cycleProblem, 3000)
+  }
+
+  cycleProblem = () => {
+    let newProb = this.getProblem()
+    this.setState({
+      current: newProb,
+      input: '',
+      response: "Hit 'enter' to check answer"
+    })
   }
 
 
 
   render() {
     return (
-      <div className="app">
-        <Header></Header>
-        <Description></Description>
-        {this.state.playing ? <Card problem={this.state.current}></Card> : <PlayButton play={this.play}></PlayButton>}
-        {this.state.playing ? <Input check={this.checkAnswer}></Input> : null}
-        {this.state.playing ? <Response text={this.state.response}></Response> : null}
+      <div className="App">
+        <div className="flex-container-column container">
+          <Header></Header>
+          <div className="inner-container">
+            <Description></Description>
+            {this.state.playing ? <Card problem={this.state.current}></Card> : <PlayButton play={this.play}></PlayButton>}
+            {this.state.playing ? <Input check={this.checkAnswer}></Input> : null}
+            {this.state.playing ? <Response text={this.state.response}></Response> : null}
+          </div>
+        </div>
         <Footer></Footer>
       </div>
     )

@@ -4,7 +4,7 @@ import '../App.css'
 
 function Response(props) {
     return (
-        <div className="flex-container-row">
+        <div className="centered">
             <span id="response">{props.text}</span>
         </div>
     )

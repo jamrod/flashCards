@@ -4,7 +4,7 @@ import '../App.css'
 
 function Card(props) {
     return (
-        <div className="flex-container-row card">
+        <div className="flex-container-row card centered">
             <h1>{props.problem.problem}</h1>
         </div>
     )

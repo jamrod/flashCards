@@ -4,7 +4,7 @@ import '../App.css'
 
 function PlayButton(props) {
     return (
-        <div className="flex-container-row">
+        <div className="centered">
             <button onClick={props.play}>Play!</button>
         </div>
     )
