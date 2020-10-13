@@ -8,7 +8,8 @@ import PlayButton from './Components/PlayButton'
 import Input from './Components/Input'
 import Response from './Components/Response'
 import Card from './Components/Card'
-import { findRenderedComponentWithType } from 'react-dom/test-utils';
+import { createTimesTable } from './getProblems.js'
+
 
 
 class App extends Component {
@@ -16,25 +17,13 @@ class App extends Component {
     super(props)
     this.state = {
       playing: false,
-      problems: this.createTimesTable(),
+      problems: createTimesTable(),
       current: { problem: null, answer: null },
       response: "Hit 'enter' to check answer",
       showAnswer: false,
       color: 'white'
     }
 
-  }
-  createTimesTable = () => {
-    let problems = []
-    for (let i = 1; i < 13; i++) {
-      for (let a = 1; a < 13; a++) {
-        problems.push({
-          "problem": `${a} x ${i}`,
-          "answer": a * i
-        })
-      }
-    }
-    return problems
   }
 
   getProblem = () => {
@@ -88,7 +77,7 @@ class App extends Component {
         <div className="flex-container-column container">
           <Header></Header>
           <div className="inner-container">
-            <Description></Description>
+            <Description playing={this.state.playing}></Description>
             {this.state.playing ? <Card problem={this.state.current} show={this.state.showAnswer} color={this.state.color}></Card> : <PlayButton play={this.play}></PlayButton>}
             {this.state.playing ? <Input check={this.checkAnswer}></Input> : null}
             {this.state.playing ? <Response text={this.state.response}></Response> : null}

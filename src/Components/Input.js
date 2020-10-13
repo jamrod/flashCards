@@ -10,9 +10,8 @@ class Input extends Component {
         }
     }
 
-    componentDidUpdate = newProps => {
+    componentDidMount = () => {
         this.input.focus()
-
     }
 
     getInput = str => {
