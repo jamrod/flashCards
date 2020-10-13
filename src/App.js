@@ -8,6 +8,7 @@ import PlayButton from './Components/PlayButton'
 import Input from './Components/Input'
 import Response from './Components/Response'
 import Card from './Components/Card'
+import { findRenderedComponentWithType } from 'react-dom/test-utils';
 
 
 class App extends Component {
@@ -17,7 +18,9 @@ class App extends Component {
       playing: false,
       problems: this.createTimesTable(),
       current: { problem: null, answer: null },
-      response: "Hit 'enter' to check answer"
+      response: "Hit 'enter' to check answer",
+      showAnswer: false,
+      color: 'white'
     }
 
   }
@@ -48,16 +51,19 @@ class App extends Component {
   }
 
   checkAnswer = str => {
-    this.setState({ input: str })
-    console.log(str)
-    console.log(this.state.current)
+    this.setState({
+      input: str,
+      showAnswer: true
+    })
     if (parseInt(str) === this.state.current.answer) {
       this.setState({
-        response: "You got it"
+        response: "You got it",
+        color: 'green'
       })
     } else {
       this.setState({
-        response: `Sorry, the correct answer is ${this.state.current.answer}`
+        response: "Sorry, that's not it",
+        color: 'red'
       })
     }
     setTimeout(this.cycleProblem, 3000)
@@ -68,7 +74,9 @@ class App extends Component {
     this.setState({
       current: newProb,
       input: '',
-      response: "Hit 'enter' to check answer"
+      response: "Hit 'enter' to check answer",
+      showAnswer: false,
+      color: 'white'
     })
   }
 
@@ -81,7 +89,7 @@ class App extends Component {
           <Header></Header>
           <div className="inner-container">
             <Description></Description>
-            {this.state.playing ? <Card problem={this.state.current}></Card> : <PlayButton play={this.play}></PlayButton>}
+            {this.state.playing ? <Card problem={this.state.current} show={this.state.showAnswer} color={this.state.color}></Card> : <PlayButton play={this.play}></PlayButton>}
             {this.state.playing ? <Input check={this.checkAnswer}></Input> : null}
             {this.state.playing ? <Response text={this.state.response}></Response> : null}
           </div>

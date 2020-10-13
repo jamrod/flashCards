@@ -14,6 +14,7 @@ body {
   text-align: center;
   display: grid;
   grid-template-rows: 1fr auto;
+  font-family: "Helvetica";
 }
 
 .container {
@@ -54,4 +55,29 @@ body {
 
 .icons {
   max-width: 25px;
+}
+
+.card {
+  align-self: center;
+  width: 150px;
+  height: 150px;
+  box-shadow: 3px 3px 5px 5px #ccc;
+  margin: 3px 3px 12px;
+}
+
+input {
+  width: 50px;
+  margin: 2px;
+}
+
+#white {
+  background-color: #ffffff;
+}
+
+#red {
+  background-color: #ff3030;
+}
+
+#green {
+  background-color: #37ff21;
 }
