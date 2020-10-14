@@ -30,7 +30,7 @@ function createDivisionTable() {
         for (let a = 1; a < 11; a++) {
             let dividend = a * i
             problems.push({
-                "problem": `${dividend} / ${a}`,
+                "problem": `${dividend} \u00f7 ${a}`,
                 "answer": i
             })
         }

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
 
 html,
 body {
@@ -39,14 +40,12 @@ body {
 .header {
   width: 100%;
   font-family: "Bungee";
-  /* background-color: white; */
 }
 
 .letters {
-  border: 1px solid black;
-  box-shadow: 1px 1px 3px 3px #ccc;
+  box-shadow: 2px 2px 1px 2px rgba(0, 0, 0, 0.4);
   padding: 0.3% 1%;
-  margin: 7px 1%;
+  margin: 8px 1%;
 }
 
 .header h1 {
@@ -67,10 +66,16 @@ body {
 
 .footer {
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: auto;
   grid-row: 2;
   align-self: end;
+  font-family: "Special Elite", cursive;
+  padding: 3px 0;
+}
+
+.footer span {
+  padding: 0 5px;
 }
 
 .flex-container-row {
@@ -98,7 +103,7 @@ body {
   align-self: center;
   width: 150px;
   height: 150px;
-  box-shadow: 3px 3px 5px 5px #ccc;
+  box-shadow: 5px 6px 2px 5px rgb(0, 0, 0, 0.4);
   margin: 12px 3px 12px;
 }
 
@@ -145,7 +150,6 @@ input {
   width: 80%;
   justify-content: space-between;
   padding: 3px;
-  /* border: 2px solid black; */
   border-style: inset;
 }
 
@@ -161,4 +165,9 @@ input {
 
 .red {
   background-color: #ff3030;
+}
+
+#reset {
+  background-color: #93f5fa;
+  padding: 2px 7px;
 }

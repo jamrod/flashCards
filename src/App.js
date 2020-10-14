@@ -74,13 +74,21 @@ class App extends Component {
 
   cycleProblem = () => {
     let newProb = this.getProblem()
-    this.setState({
-      current: newProb,
-      input: '',
-      response: "Hit 'enter' to check answer",
-      showAnswer: false,
-      color: 'white'
-    })
+    let bool = true
+    while (bool) {
+      if (newProb !== this.state.current) {
+        this.setState({
+          current: newProb,
+          input: '',
+          response: "Hit 'enter' to check answer",
+          showAnswer: false,
+          color: 'white'
+        })
+        bool = false
+      } else {
+        newProb = this.getProblem()
+      }
+    }
   }
 
   resetGame = () => {
