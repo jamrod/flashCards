@@ -9,6 +9,8 @@ body {
 }
 
 .App {
+  margin: 0;
+  padding: 0;
   height: 100%;
   width: 100%;
   text-align: center;
@@ -25,7 +27,7 @@ body {
 
 .inner-container {
   margin: 0;
-  max-width: 800px;
+  max-width: 500px;
 }
 
 .footer {
@@ -62,12 +64,28 @@ body {
   width: 150px;
   height: 150px;
   box-shadow: 3px 3px 5px 5px #ccc;
-  margin: 3px 3px 12px;
+  margin: 12px 3px 12px;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.button-container {
+  width: 33%;
+}
+
+.play-buttons {
+  width: 100%;
+  height: 40px;
+  padding: 2px;
+  margin: 1px 0px;
 }
 
 input {
   width: 50px;
   margin: 2px;
+  padding: 2px;
 }
 
 #white {
@@ -80,4 +98,27 @@ input {
 
 #green {
   background-color: #37ff21;
+}
+
+#response {
+  margin: 2px;
+  padding: 2px;
+}
+
+#scoreboard {
+  width: 80%;
+  justify-content: space-between;
+  padding: 3px;
+  /* border: 2px solid black; */
+  border-style: inset;
+}
+
+#right {
+  border-bottom: #37ff21 solid;
+  padding: 1px 2px;
+}
+
+#wrong {
+  border-bottom: #ff3030 solid;
+  padding: 1px 2px;
 }

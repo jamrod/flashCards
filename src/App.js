@@ -4,12 +4,12 @@ import './App.css';
 import Header from './Components/Header'
 import Footer from './Components/Footer'
 import Description from './Components/Description'
-import PlayButton from './Components/PlayButton'
+import PlayButtons from './Components/PlayButtons'
 import Input from './Components/Input'
 import Response from './Components/Response'
 import Card from './Components/Card'
-import { createTimesTable } from './getProblems.js'
-
+import { getProblemsTable } from './getProblems.js'
+import ResetButton from './Components/ResetButton'
 
 
 class App extends Component {
@@ -17,13 +17,24 @@ class App extends Component {
     super(props)
     this.state = {
       playing: false,
-      problems: createTimesTable(),
-      current: { problem: null, answer: null },
+      problems: [],
+      current: { problem: 0, answer: 0 },
       response: "Hit 'enter' to check answer",
       showAnswer: false,
-      color: 'white'
+      color: 'white',
+      score: {
+        right: 0, wrong: 0
+      }
     }
 
+  }
+
+  setProblems = (str) => {
+    let problems = getProblemsTable(str)
+    this.setState({
+      problems: problems
+    })
+    setTimeout(this.play, 500)
   }
 
   getProblem = () => {
@@ -37,6 +48,7 @@ class App extends Component {
       playing: true,
       current: current
     })
+    this.child.answer.focus()
   }
 
   checkAnswer = str => {
@@ -45,15 +57,17 @@ class App extends Component {
       showAnswer: true
     })
     if (parseInt(str) === this.state.current.answer) {
-      this.setState({
+      this.setState(prev => ({
         response: "You got it",
-        color: 'green'
-      })
+        color: 'green',
+        score: { right: prev.score.right + 1, wrong: prev.score.wrong }
+      }))
     } else {
-      this.setState({
+      this.setState(prev => ({
         response: "Sorry, that's not it",
-        color: 'red'
-      })
+        color: 'red',
+        score: { right: prev.score.right, wrong: prev.score.wrong + 1 }
+      }))
     }
     setTimeout(this.cycleProblem, 3000)
   }
@@ -69,7 +83,19 @@ class App extends Component {
     })
   }
 
-
+  resetGame = () => {
+    this.setState({
+      playing: false,
+      problems: [],
+      current: { problem: 0, answer: 0 },
+      response: "Hit 'enter' to check answer",
+      showAnswer: false,
+      color: 'white',
+      score: {
+        right: 0, wrong: 0
+      }
+    })
+  }
 
   render() {
     return (
@@ -78,9 +104,11 @@ class App extends Component {
           <Header></Header>
           <div className="inner-container">
             <Description playing={this.state.playing}></Description>
-            {this.state.playing ? <Card problem={this.state.current} show={this.state.showAnswer} color={this.state.color}></Card> : <PlayButton play={this.play}></PlayButton>}
-            {this.state.playing ? <Input check={this.checkAnswer}></Input> : null}
-            {this.state.playing ? <Response text={this.state.response}></Response> : null}
+            <PlayButtons setProblems={this.setProblems}></PlayButtons>
+            {this.state.playing ? <Card problem={this.state.current} show={this.state.showAnswer} color={this.state.color}></Card> : null}
+            {this.state.playing ? <Input ref={ch => this.child = ch} check={this.checkAnswer}></Input> : null}
+            {this.state.playing ? <Response text={this.state.response} score={this.state.score}></Response> : null}
+            {this.state.playing ? <ResetButton reset={this.resetGame}></ResetButton> : null}
           </div>
         </div>
         <Footer></Footer>

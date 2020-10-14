@@ -4,8 +4,14 @@ import '../App.css'
 
 function Response(props) {
     return (
-        <div className="centered">
-            <span id="response">{props.text}</span>
+        <div className="centered flex-container-column" id="response">
+            <p>{props.text}</p>
+            <div id="scoreboard" className="flex-container-row">
+                <span>Score</span>
+                <span id="right">Right: {props.score.right}</span>
+                <span id="wrong">Missed: {props.score.wrong}</span>
+            </div>
+
         </div>
     )
 }

@@ -10,10 +10,6 @@ class Input extends Component {
         }
     }
 
-    componentDidMount = () => {
-        this.input.focus()
-    }
-
     getInput = str => {
         this.setState({
             input: str
@@ -25,11 +21,12 @@ class Input extends Component {
         this.setState({ input: '' })
     }
 
+
     render() {
         return (
             <div className="centered">
                 <input
-                    ref={(input) => { this.input = input }}
+                    ref={(ip) => { this.answer = ip }}
                     type="text"
                     id="input"
                     onChange={e => {
