@@ -52,21 +52,19 @@ class App extends Component {
   }
 
   checkAnswer = str => {
-    this.setState({
-      input: str,
-      showAnswer: true
-    })
     if (parseInt(str) === this.state.current.answer) {
       this.setState(prev => ({
         response: "You got it",
         color: 'green',
-        score: { right: prev.score.right + 1, wrong: prev.score.wrong }
+        score: { right: prev.score.right + 1, wrong: prev.score.wrong },
+        showAnswer: true
       }))
     } else {
       this.setState(prev => ({
         response: "Sorry, that's not it",
         color: 'red',
-        score: { right: prev.score.right, wrong: prev.score.wrong + 1 }
+        score: { right: prev.score.right, wrong: prev.score.wrong + 1 },
+        showAnswer: true
       }))
     }
     setTimeout(this.cycleProblem, 3000)

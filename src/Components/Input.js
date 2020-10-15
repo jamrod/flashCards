@@ -11,9 +11,14 @@ class Input extends Component {
     }
 
     getInput = str => {
-        this.setState({
-            input: str
-        })
+        let n = parseInt(str)
+        if (Number.isInteger(n)) {
+            this.setState({
+                input: str
+            })
+        } else {
+            this.answer.value = ''
+        }
     }
 
     clear = () => {

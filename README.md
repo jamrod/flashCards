@@ -1,6 +1,6 @@
 ## FlashCards app
 
-Simple flash cards for practicing times tables
+Simple flash cards for practicing basic math skills
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
