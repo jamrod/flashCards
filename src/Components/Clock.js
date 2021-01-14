@@ -9,7 +9,7 @@ function Clock(props) {
     root.style.setProperty('--minute', `${minute}deg`)
     const hour = (parseInt(props.problem.problem[0]) * 30) + (minute / 12)
     root.style.setProperty('--hour', `${hour}deg`)
-    const answerText = getTimeText(props.problem.problem)
+    const answerText = props.problem ? getTimeText(props.problem.problem) : null
 
     function showAnswer(bool) {
         if (bool) {
@@ -18,6 +18,10 @@ function Clock(props) {
                     <h2>{props.problem.answer}</h2>
                     <h2>{answerText}</h2>
                 </>
+            )
+        } else {
+            return (
+                <><p>Enter answer like a digital clock '#:##'</p></>
             )
         }
     }
