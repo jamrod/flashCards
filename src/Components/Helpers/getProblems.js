@@ -79,6 +79,22 @@ function createSubtractionTable100() {
     return problems
 }
 
+function createClockProblemSet() {
+    let problems = []
+    for (let i = 1; i < 13; i += 1) {
+        for (let ii = 0; ii < 60; ii += 5) {
+            let j = ii
+            if (ii == 0) { j = '00' }
+            if (ii == 5) { j = '05' }
+            problems.push({
+                'problem': [i, j],
+                'answer': `${i}:${j}`
+            })
+        }
+    }
+    return problems
+}
+
 export function getProblemsTable(str) {
     switch (str) {
         case 'times':
@@ -93,6 +109,8 @@ export function getProblemsTable(str) {
             return createSubtractionTable()
         case 'subtraction100':
             return createSubtractionTable100()
+        case 'clock':
+            return createClockProblemSet()
         default:
             return null
     }

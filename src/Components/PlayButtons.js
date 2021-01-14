@@ -11,6 +11,7 @@ function PlayButtons(props) {
             <div className="button-container"><button className="play-buttons" onClick={() => { props.setProblems('subtraction100') }}>Subtraction to 200</button></div>
             <div className="button-container"><button className="play-buttons" onClick={() => { props.setProblems('times') }}>Basic Multiplication</button></div>
             <div className="button-container"><button className="play-buttons" onClick={() => { props.setProblems('division') }}>Basic Division</button></div>
+            <div className="button-container"><button className="play-buttons" onClick={() => { props.setProblems('clock') }}>Analog Clock</button></div>
         </div>
     )
 }

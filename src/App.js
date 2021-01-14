@@ -8,8 +8,9 @@ import PlayButtons from './Components/PlayButtons'
 import Input from './Components/Input'
 import Response from './Components/Response'
 import Card from './Components/Card'
-import { getProblemsTable } from './getProblems.js'
+import { getProblemsTable } from './Components/Helpers/getProblems.js'
 import ResetButton from './Components/ResetButton'
+import Clock from './Components/Clock'
 
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
       response: "Hit 'enter' to check answer",
       showAnswer: false,
       color: 'white',
+      clock: false,
       score: {
         right: 0, wrong: 0
       }
@@ -30,9 +32,12 @@ class App extends Component {
   }
 
   setProblems = (str) => {
+    let c
+    str === 'clock' ? c = true : c = false
     let problems = getProblemsTable(str)
     this.setState({
-      problems: problems
+      problems: problems,
+      clock: c
     })
     setTimeout(this.play, 500)
   }
@@ -52,7 +57,17 @@ class App extends Component {
   }
 
   checkAnswer = str => {
-    if (parseInt(str) === this.state.current.answer) {
+    let correct = false
+    if (this.state.clock) {
+      if (str === this.state.current.answer) {
+        correct = true
+      }
+    } else {
+      if (parseInt(str) === this.state.current.answer) {
+        correct = true
+      }
+    }
+    if (correct) {
       this.setState(prev => ({
         response: "You got it",
         color: 'green',
@@ -97,11 +112,13 @@ class App extends Component {
       response: "Hit 'enter' to check answer",
       showAnswer: false,
       color: 'white',
+      clock: false,
       score: {
         right: 0, wrong: 0
       }
     })
   }
+
 
   render() {
     return (
@@ -111,7 +128,8 @@ class App extends Component {
           <div className="inner-container">
             <Description playing={this.state.playing}></Description>
             <PlayButtons setProblems={this.setProblems}></PlayButtons>
-            {this.state.playing ? <Card problem={this.state.current} show={this.state.showAnswer} color={this.state.color}></Card> : null}
+            {this.state.playing && !this.state.clock ? <Card problem={this.state.current} show={this.state.showAnswer} color={this.state.color}></Card> : null}
+            {this.state.playing && this.state.clock ? <Clock problem={this.state.current} show={this.state.showAnswer} color={this.state.color}></Clock> : null}
             {this.state.playing ? <Input ref={ch => this.child = ch} check={this.checkAnswer}></Input> : null}
             {this.state.playing ? <Response text={this.state.response} score={this.state.score}></Response> : null}
             {this.state.playing ? <ResetButton reset={this.resetGame}></ResetButton> : null}

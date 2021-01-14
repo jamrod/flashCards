@@ -11,6 +11,11 @@ body {
   height: 100%;
 }
 
+:root {
+  --hour: 0deg;
+  --minute: 0deg;
+}
+
 .App {
   margin: 0;
   padding: 0;
@@ -179,4 +184,53 @@ input {
 #reset {
   background-color: #93f5fa;
   padding: 2px 7px;
+}
+.clock {
+  width: 220px;
+  height: 220px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 6px 2px 5px rgb(0, 0, 0, 0.4);
+  margin: 12px 3px 12px;
+}
+
+#hour {
+  width: 4px;
+  height: 100px;
+  position: absolute;
+  z-index: 1;
+  transform: rotate(var(--hour));
+}
+
+#inner-hour {
+  height: 50px;
+  width: 4px;
+  background-color: black;
+  float: right;
+}
+
+#minute {
+  width: 3px;
+  height: 140px;
+  position: absolute;
+  z-index: 1;
+  transform: rotate(var(--minute));
+}
+
+#inner-minute {
+  width: 3px;
+  height: 70px;
+  background-color: blue;
+  float: right;
+}
+
+.answer {
+  min-height: 50px;
+}
+
+.answer h2 {
+  margin: 0 auto;
+  padding: 10px 5px 0;
 }
