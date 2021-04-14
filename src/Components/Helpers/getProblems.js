@@ -84,8 +84,8 @@ function createClockProblemSet() {
     for (let i = 1; i < 13; i += 1) {
         for (let ii = 0; ii < 60; ii += 5) {
             let j = ii
-            if (ii == 0) { j = '00' }
-            if (ii == 5) { j = '05' }
+            if (ii === 0) { j = '00' }
+            if (ii === 5) { j = '05' }
             problems.push({
                 'problem': [i, j],
                 'answer': `${i}:${j}`

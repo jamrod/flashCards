@@ -15,12 +15,14 @@ export function getTimeText(time) {
         case 30:
             return `Half past ${hour}`
         case 45:
-            if (hour == 'Twelve') {
+            if (hour === 'Twelve') {
                 hour = "One"
             } else {
                 hour = underTwenty[time[0] + 1]
             }
             return `A quarter till ${hour}`
+        default:
+            break
     }
     if (min < 10) {
         min = underTwenty[min]
